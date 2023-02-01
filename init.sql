@@ -29,3 +29,8 @@ CREATE TABLE `user_roles` (
 
 INSERT INTO roles VALUES (1,"customer","2023-01-31 13:02:52","2023-01-31 13:02:52");
 INSERT INTO roles VALUES (2,"business","2023-01-31 13:02:52","2023-01-31 13:02:52");
+INSERT INTO users VALUES ('1', 'customer1', 'customer1@gmail.com', '$2a$08$7aHwoAVoCDFBIoiIrAahHuoDWEOXp9RmXid5vvd5R9aarq3NSBXIK', '2023-02-01 12:58:17', '2023-02-01 12:58:17');
+INSERT INTO users VALUES ('2', 'cutsomer2', 'cutsomer2@gmail.com', '$2a$08$7aHwoAVoCDFBIoiIrAahHuoDWEOXp9RmXid5vvd5R9aarq3NSBXIK', '2023-02-01 12:58:17', '2023-02-01 12:58:17');
+INSERT INTO users VALUES ('3', 'business1', 'business1@gmail.com', '$2a$08$7aHwoAVoCDFBIoiIrAahHuoDWEOXp9RmXid5vvd5R9aarq3NSBXIK', '2023-02-01 12:58:17', '2023-02-01 12:58:17');
+INSERT INTO users VALUES ('4', 'business2', 'business2@gmail.com', '$2a$08$7aHwoAVoCDFBIoiIrAahHuoDWEOXp9RmXid5vvd5R9aarq3NSBXIK', '2023-02-01 12:58:17', '2023-02-01 12:58:17');
+)
