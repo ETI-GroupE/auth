@@ -29,7 +29,7 @@ exports.signup = (req, res) => {
 					});
 				});
 			} else {
-				// user role = 1
+				// default to customer role (1)
 				user.setRoles([1]).then(() => {
 					res.send({ message: "User was registered successfully!" });
 				});
@@ -47,12 +47,13 @@ exports.signin = (req, res) => {
 		},
 	})
 		.then((user) => {
+			// No such user
 			if (!user) {
 				return res.status(404).send({ message: "User Not found." });
 			}
 
+			// Invalid password
 			var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
-
 			if (!passwordIsValid) {
 				return res.status(401).send({
 					accessToken: null,
@@ -60,6 +61,7 @@ exports.signin = (req, res) => {
 				});
 			}
 
+			//User found, create a JWT signed with secret for 24hs
 			var token = jwt.sign({ id: user.id }, config.secret, {
 				expiresIn: 86400, // 24 hours
 			});

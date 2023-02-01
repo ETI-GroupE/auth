@@ -6,12 +6,14 @@ const User = db.user;
 verifyToken = (req, res, next) => {
 	let token = req.headers["x-access-token"];
 
+	// No token
 	if (!token) {
 		return res.status(403).send({
 			message: "No token provided!",
 		});
 	}
 
+	// Verify token is signed with secret and is valid (24h)
 	jwt.verify(token, config.secret, (err, decoded) => {
 		if (err) {
 			return res.status(401).send({
@@ -23,58 +25,36 @@ verifyToken = (req, res, next) => {
 	});
 };
 
-isAdmin = (req, res, next) => {
+isCustomer = (req, res, next) => {
 	User.findByPk(req.userId).then((user) => {
 		user.getRoles().then((roles) => {
 			for (let i = 0; i < roles.length; i++) {
-				if (roles[i].name === "admin") {
+				if (roles[i].name === "customer") {
 					next();
 					return;
 				}
 			}
 
 			res.status(403).send({
-				message: "Require Admin Role!",
+				message: "Require customer Role!",
 			});
 			return;
 		});
 	});
 };
 
-isModerator = (req, res, next) => {
+isBusiness = (req, res, next) => {
 	User.findByPk(req.userId).then((user) => {
 		user.getRoles().then((roles) => {
 			for (let i = 0; i < roles.length; i++) {
-				if (roles[i].name === "moderator") {
+				if (roles[i].name === "business") {
 					next();
 					return;
 				}
 			}
 
 			res.status(403).send({
-				message: "Require Moderator Role!",
-			});
-		});
-	});
-};
-
-isModeratorOrAdmin = (req, res, next) => {
-	User.findByPk(req.userId).then((user) => {
-		user.getRoles().then((roles) => {
-			for (let i = 0; i < roles.length; i++) {
-				if (roles[i].name === "moderator") {
-					next();
-					return;
-				}
-
-				if (roles[i].name === "admin") {
-					next();
-					return;
-				}
-			}
-
-			res.status(403).send({
-				message: "Require Moderator or Admin Role!",
+				message: "Require business Role!",
 			});
 		});
 	});
@@ -82,8 +62,7 @@ isModeratorOrAdmin = (req, res, next) => {
 
 const authJwt = {
 	verifyToken: verifyToken,
-	isAdmin: isAdmin,
-	isModerator: isModerator,
-	isModeratorOrAdmin: isModeratorOrAdmin,
+	isCustomer: isCustomer,
+	isBusiness: isBusiness,
 };
 module.exports = authJwt;
