@@ -1,16 +1,20 @@
-const config = require("../config/db.config.js");
+const dbconfig = require("../config/db.config.js");
+const masterConfig = dbconfig.master;
+const replicaConfig = dbconfig.replica;
 
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
-	host: config.HOST,
-	dialect: config.dialect,
+const sequelize = new Sequelize(masterConfig.DB, masterConfig.USER, masterConfig.PASSWORD, {
+	dialect: masterConfig.dialect,
 	operatorsAliases: false,
-
+	replication: {
+		read: [{ host: replicaConfig.HOST }],
+		write: { host: masterConfig.HOST },
+	},
 	pool: {
-		max: config.pool.max,
-		min: config.pool.min,
-		acquire: config.pool.acquire,
-		idle: config.pool.idle,
+		max: masterConfig.pool.max,
+		min: masterConfig.pool.min,
+		acquire: masterConfig.pool.acquire,
+		idle: masterConfig.pool.idle,
 	},
 });
 

@@ -1,14 +1,29 @@
 module.exports = {
-	HOST: "34.162.74.212",
-	USER: "root",
-	PASSWORD: "password",
-	DB: "db",
-	dialect: "mysql",
-	pool: {
-		max: 5,
-		min: 0,
-		acquire: 30000,
-		idle: 10000,
+	master: {
+		HOST: process.env.master,
+		USER: process.env.user,
+		PASSWORD: process.env.password,
+		DB: "db",
+		dialect: "mysql",
+		pool: {
+			max: 5,
+			min: 0,
+			acquire: 30000,
+			idle: 10000,
+		},
+	},
+	replica: {
+		HOST: process.env.replica,
+		USER: process.env.user,
+		PASSWORD: process.env.password,
+		DB: "db",
+		dialect: "mysql",
+		pool: {
+			max: 5,
+			min: 0,
+			acquire: 30000,
+			idle: 10000,
+		},
 	},
 };
 
