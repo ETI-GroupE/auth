@@ -7,9 +7,9 @@ module.exports = function (app) {
 		next();
 	});
 
-	app.get("/api/v1/verify/public", controller.allAccess);
+	app.post("/api/v1/verify/public", controller.allAccess);
 
-	app.get("/api/v1/verify/customer", [authJwt.verifyToken], controller.customerBoard);
+	app.post("/api/v1/verify/customer", [authJwt.verifyToken], controller.customerBoard);
 
-	app.get("/api/v1/verify/business", [authJwt.verifyToken, authJwt.isBusiness], controller.businessBoard);
+	app.post("/api/v1/verify/business", [authJwt.verifyToken, authJwt.isBusiness], controller.businessBoard);
 };
