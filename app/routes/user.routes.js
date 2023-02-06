@@ -11,6 +11,8 @@ module.exports = function (app) {
 
 	app.post("/api/v1/user/info", controller.userInfo);
 
+	app.post("/api/v1/user/update", [authJwt.verifyToken], controller.userUpdate);
+
 	app.post("/api/v1/verify/customer", [authJwt.verifyToken], controller.customerBoard);
 
 	app.post("/api/v1/verify/business", [authJwt.verifyToken, authJwt.isBusiness], controller.businessBoard);
