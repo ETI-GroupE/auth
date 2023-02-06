@@ -66,3 +66,7 @@ exports.customerBoard = (req, res) => {
 exports.businessBoard = (req, res) => {
 	res.status(200).send("Authorized business");
 };
+
+exports.adminBoard = (req, res) => {
+	res.status(200).send("Authorized admin");
+};
