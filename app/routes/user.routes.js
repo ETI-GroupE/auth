@@ -9,6 +9,8 @@ module.exports = function (app) {
 
 	app.post("/api/v1/verify/public", controller.allAccess);
 
+	app.post("/api/v1/business/info", controller.businessInfo);
+
 	app.post("/api/v1/verify/customer", [authJwt.verifyToken], controller.customerBoard);
 
 	app.post("/api/v1/verify/business", [authJwt.verifyToken, authJwt.isBusiness], controller.businessBoard);
