@@ -1,8 +1,10 @@
+const User = db.user;
+
 exports.allAccess = (req, res) => {
 	res.status(200).send("Public Content.");
 };
 
-exports.businessInfo = (req, res) => {
+exports.userInfo = (req, res) => {
 	User.findOne({
 		where: {
 			id: req.body.id,
