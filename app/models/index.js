@@ -11,10 +11,6 @@ const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
         min: config.pool.min,
         acquire: config.pool.acquire,
         idle: config.pool.idle,
-        max: masterConfig.pool.max,
-        min: masterConfig.pool.min,
-        acquire: masterConfig.pool.acquire,
-        idle: masterConfig.pool.idle,
     },
 });
 
